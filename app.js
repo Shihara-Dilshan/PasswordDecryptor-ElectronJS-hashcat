@@ -37,6 +37,21 @@ app.get("/api/v2/hash/:hashtype/:hashcode/:attacktype", (req, res) => {
   );
 });
 
+app.get("/api/v2/viewlist", (req, res) => {
+
+  exec(
+    join(
+      __dirname,
+      `/hash/viewlist.sh ${__dirname}`
+    ),
+    (err, stdout, stderr) => {
+      res.status(200).json({ output: stdout, error: null });
+    }
+  );
+});
+
+
+
 app.get("/api/v2/guess/:guesses", (req, res) => {
   console.log(req.params.guesses);
 
@@ -44,11 +59,9 @@ app.get("/api/v2/guess/:guesses", (req, res) => {
     join(__dirname, `/hash/mine2.txt`),
     `${req.params.guesses}\n`,
     function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("append success");
-      }
+      
+        res.status(200).json({ output: "success", error: null });
+      
     }
   );
 });

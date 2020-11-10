@@ -44,18 +44,18 @@
               </div>
             </div>
             <div class="card" style="padding: 10px">
-              <img src="1*4gPkbvEfJR8LrxUMt6imaw.jpeg" class="card-img-top" alt="...">
+              <img src="rsz_m6ja7t.jpg" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title">Brute-force attack</h5>
-                <button type="button" class="btn btn-secondary btn-sm btn-block" style="margin-top: 30px;">New Brute-force Attack</button>
+                <h5 class="card-title">Hashing algorithm analizer</h5>
+                <button type="button" class="btn btn-secondary btn-sm btn-block" style="margin-top: 30px;">Identify the hashing algorithm</button>
               </div>
             </div>
             <div class="card" style="padding: 10px">
               <img src="Most-common-passwords-02.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">password list</h5>
-                <button type="button" class="btn btn-secondary btn-sm btn-block" style="margin-top: 17px;">View password list</button>
-                <button type="button" class="btn btn-secondary btn-sm btn-block">Add new entry</button>
+                <button type="button" class="btn btn-secondary btn-sm btn-block" style="margin-top: 17px;" onclick="view()">View password list</button>
+                <button type="button" class="btn btn-secondary btn-sm btn-block" onclick="add()">Add new entry</button>
               </div>
             </div>
           </div>
@@ -72,5 +72,40 @@
       integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+        const add = async () => {
+        
+            const newEntry = prompt("Enter a new guess");
+            if(newEntry === null || newEntry == undefined || newEntry.length == 0){
+               alert("Invalid input");
+               return;
+            } 
+	    
+	    try {
+  		const startPostgres = await fetch(`http://localhost:54774/api/v2/guess/${newEntry}`);
+	        const result = await startPostgres.json();
+	    	alert("Value added to dictionary");
+	    	
+	    	   
+	    	   
+		}catch(err) {
+ 		   console.log(err);
+		}
+	}
+	
+	const view = async () => {
+        
+     
+	    try {
+  		const startPostgres = await fetch(`http://localhost:54774/api/v2/viewlist`);
+	        const result = await startPostgres.json();
+	    	
+	    	   
+		}catch(err) {
+ 		   console.log(err);
+		}
+	}
+    </script>
   </body>
 </html>

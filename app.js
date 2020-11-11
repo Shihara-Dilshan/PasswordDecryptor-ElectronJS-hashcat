@@ -29,7 +29,7 @@ app.get("/api/v2/hash/:hashtype/:hashcode/:attacktype", (req, res) => {
   exec(
     join(
       __dirname,
-      `/hash/hashcrack.sh ${req.params.hashcode} ${req.params.hashtype} ${req.params.attacktype}`
+      `/hash/hashcrack.sh ${req.params.hashtype}`
     ),
     (err, stdout, stderr) => {
       res.status(200).json({ output: stdout, error: null });
@@ -50,7 +50,32 @@ app.get("/api/v2/viewlist", (req, res) => {
   );
 });
 
+app.get('/api/v2/analizer/analize/:hashcode', (req, res) => {
+  exec(join(__dirname, `/hash/analize.sh ${req.params.hashcode}`), (err, stdout, stderr) => {
+    if (err) {
+      return res.status(400).json({ output: null, error: err.message })
+    }
 
+    res.status(200).json({ output: stdout, error: null })
+  })
+})
+
+
+
+app.get("/api/v2/readfile", (req, res) => {
+
+
+  const a = fs.readFileSync(
+    join(__dirname, `/hash/mine.txt`),
+    function (err, data) {
+          console.log(data.toString())
+        res.status(200).json({ output: data.toString(), error: null });
+      
+    }
+  );
+
+  res.status(200).json({ output: a.toString(), error: null });
+});
 
 app.get("/api/v2/guess/:guesses", (req, res) => {
   console.log(req.params.guesses);

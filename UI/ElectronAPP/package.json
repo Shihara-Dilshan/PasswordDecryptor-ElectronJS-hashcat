@@ -1,0 +1,25 @@
+{
+  "name": "electronapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "npm run dev",
+    "watch": "electron . --no-sandbox",
+    "client": "npm start --prefix ../../",
+    "dev": "concurrently \"npm run watch\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "electron": "^10.1.5",
+    "electron-alert": "^0.1.11",
+    "electron-prompt": "^1.6.0",
+    "smalltalk": "^4.0.7",
+    "vex-js": "^4.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
